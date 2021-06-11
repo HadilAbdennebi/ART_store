@@ -1,0 +1,62 @@
+easy_admin:
+    design:
+        menu: 
+            - label: 'Produits'
+              children:
+            - {entity: Produit, label: 'liste des produits', icon: 'th-list'}
+            - {entity: Produit, label: 'ajouter produit', icon: 'plus', params: {action: 'new'}}
+            - label: 'themes'
+              children:
+            - {entity: Theme, label: 'liste des théme', icon: 'th-list'}
+            - {entity: Theme, label: 'ajouter des thémes', icon: 'plus', params: {action: 'new'}}
+            - label: 'Clients'
+              children:
+            - {entity: Client, label: 'liste des Client', icon: 'th-list'}
+            - {entity: Client, label: 'ajouter Client', icon: 'plus', params: {action: 'new'}}
+            - label: 'Settings'
+            - {entity: User, label: 'User', icon: 'user'}   
+    site_name: 'ART <u>Admin</u>'
+    user:
+        display_name: false
+        display_avatar: true
+        name_property_path: 'fullName'
+    entities:
+        Produit: 
+          class: App\Entity\Produit
+          list:
+            actions: ['show','edit','delete']
+            batch_actions: ['delete']
+            filters: ['prix']
+            title: 'Produit'
+            fields:
+                    - 'id'
+                    - 'titre'
+                    - 'createdAt'
+                    - 'prix'
+                    - 'theme'
+                    - {property: 'image',type: 'image', base_path: '%uploads_path%' }
+          show:
+            fields:
+                    - 'id'
+                    - 'titre'
+                    - 'createdAt'
+                    - 'prix'
+                    - 'theme'
+                    - {property: 'image',type: 'image', base_path: '%uploads_path%' }
+          form:          
+            fields:
+                    
+                    - 'titre'
+                    - 'prix'
+                    - 'theme'
+                    - { property: 'imageFile', type: 'vich_image' }   
+        Theme:
+          class: App\Entity\Theme
+          form:          
+            fields:
+                    
+                    - 'titre'
+        User:
+          class: App\Entity\User
+        Client: 
+          class: App\Entity\Client
